@@ -141,16 +141,18 @@ class NamedObject{
             super.init()
             self.Name=n;
         }
-        func other(v: Double)->Double{
-            radius = pow((3*v/(4*Double.pi)),(1/3))
-            return v
-        }
-        func other()->Double{
-            return(4.0/3.0 * Double.pi*pow(radius, 3))
+      
+        var volume: Double {
+            get {
+                  return(4.0/3.0 * Double.pi*pow(radius, 3))
+            }
+            set {
+                radius = pow((3*newValue/(4*Double.pi)),(1/3))
+            }
         }
         
         override func describe() -> String {
-            return "Object called "+Name+" having radius: "+String(radius)+" and V = "+String(round(self.other()))
+            return "Object called "+Name+" having radius: "+String(radius)+" and V = "+String(round(volume))
         }
         
         
@@ -164,5 +166,5 @@ print(test.describe())
 var test2 = NamedObject.Sphere(n:"kula",r:3.0);
 print(test2.describe())
 
-test2.other(v:14)
+test2.volume=14
 print(test2.describe())
